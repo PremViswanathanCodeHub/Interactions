@@ -1,209 +1,533 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>List of Members for 1to1 Interaction</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Truly ZS - One-on-One Interaction Bookings (images fixed)</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 30px 150px; background-color: #f0f4f9; }
-    h1 { text-align: center; margin-bottom: 5px; }
-    h2 { text-align: center; font-weight: normal; color: #666; margin-bottom: 40px; }
-    .category { margin-bottom: 50px; }
-    .category h3 { font-size: 1.4em; font-weight: bold; margin-bottom: 20px; color: #333; }
-    .cards { display: flex; flex-wrap: wrap; gap: 10px; }
-    .card { background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); width: 250px; height: 320px; display: flex; flex-direction: column; overflow: hidden; transition: transform 0.2s; cursor: pointer; }
-    .card:hover { transform: translateY(-5px); }
-    .card-top { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 25px 15px 10px; }
-    .card-top img { width: 140px; height: 140px; border-radius: 50%; margin-bottom: 12px; object-fit: cover; }
-    .card-top h4 { font-size: 1.3em; margin: 0; font-weight: bold; text-align: center; }
-    .card-bottom { background: #f1f1f1; padding: 12px; text-align: center; font-size: 1em; font-weight: 500; color: #444; }
-
+    :root{
+      --bg:#f0f4f9;
+      --card-bg:#fff;
+      --muted:#666;
+      --accent:#225795;
+    }
+    body{font-family:Arial,Helvetica,sans-serif;margin:0;padding:30px 80px;background:var(--bg);color:#222;}
+    h1{margin:0;text-align:center;font-size:36px;font-weight:700}
+    h2{margin:6px 0 20px;text-align:center;font-size:20px;color:var(--muted)}
+    .spacer{height:30px}
+    .category{margin-bottom:40px}
+    .category h3{font-size:1.25rem;margin:0 0 12px;color:#333}
+    .cards{display:flex;flex-wrap:wrap;gap:12px}
+    .card{background:var(--card-bg);border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.08);width:240px;min-height:300px;display:flex;flex-direction:column;overflow:hidden;cursor:pointer;transition:transform .18s,box-shadow .18s}
+    .card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,0.12)}
+    .card-top{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:20px 12px}
+    .card-top img{width:140px;height:140px;border-radius:50%;object-fit:cover;margin-bottom:12px;background:#eee}
+    .card-top h4{margin:0;font-size:1.05rem;text-align:center;font-weight:700}
+    .card-bottom{background:#f3f5f7;padding:10px;text-align:center;font-weight:600;color:#444}
     /* Modal */
-    .modal { display: flex; align-items: center; justify-content: center; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
-    .modal.show { opacity: 1; pointer-events: all; }
-    .modal-content { background: #fff; border-radius: 16px; padding: 30px; width: 500px; max-width: 90%; text-align: center; position: relative; box-shadow: 0 6px 18px rgba(0,0,0,0.2); transform: scale(0.8); transition: transform 0.3s ease; }
-    .modal.show .modal-content { transform: scale(1); }
-    .modal-content img { width: 200px; height: 200px; border-radius: 50%; margin-bottom: 20px; object-fit: cover; }
-    .modal-content h3 { margin: 10px 0; font-size: 28px; font-weight: bold; }
-    .modal-content h4 { margin: 5px 0 15px; font-size: 20px; color: #555; font-weight: 500; }
-    .modal-content p { font-size: 16px; color: #444; line-height: 1.6; text-align: left; }
-    .book-btn { display: inline-block; margin-top: 20px; padding: 12px 25px; background-color: #225795; color: #fff; border-radius: 8px; text-decoration: none; font-weight: bold; transition: background 0.2s; }
-    .book-btn:hover { background-color: #0f3f6d; }
-    .close-btn { position: absolute; top: 15px; right: 20px; font-size: 22px; cursor: pointer; font-weight: bold; color: #888; }
-    .close-btn:hover { color: #000; }
+    .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.55);z-index:1000;opacity:0;pointer-events:none;transition:opacity .28s ease}
+    .modal.show{opacity:1;pointer-events:all}
+    .modal-content{background:#fff;border-radius:14px;padding:28px;width:760px;max-width:94%;box-shadow:0 16px 50px rgba(0,0,0,0.28);transform:scale(.86);transition:transform .28s ease}
+    .modal.show .modal-content{transform:scale(1)}
+    .modal-content img{width:220px;height:220px;border-radius:50%;object-fit:cover;margin-bottom:18px}
+    .modal-content h3{margin:6px 0;font-size:26px}
+    .modal-content h4{margin:6px 0 14px;color:#555;font-weight:600}
+    .modal-content p{font-size:15px;color:#333;line-height:1.6;text-align:left;max-height:48vh;overflow:auto;padding-right:6px}
+    .close-btn{position:absolute;right:16px;top:12px;font-size:22px;font-weight:700;color:#888;cursor:pointer}
+    .close-btn:hover{color:#000}
+    iframe{border:0;width:100%}
+    @media (max-width:900px){
+      body{padding:18px}
+      .card{width:48%}
+      .modal-content{width:92%}
+    }
+    @media (max-width:520px){
+      .card{width:100%}
+      .card-top img{width:120px;height:120px}
+      .modal-content img{width:160px;height:160px}
+    }
   </style>
 </head>
 <body>
-  <h1>List of members for 1to1 interaction</h1>
-  <h2>Select and book a member for one to one interaction from the list below</h2>
+  <h1>Truly ZS</h1>
+  <h2>One-on-One Interaction Bookings</h2>
+  <div class="spacer"></div>
+
+  <!-- Booking iframe -->
+  <iframe height="750" src="https://zohoschools.zohobookings.in/portal-embed#/118076000001056010" allowfullscreen></iframe>
+
+  <div class="spacer"></div>
+
+  <!-- ======= Categories and Cards (mirrored order from your file) ======= -->
+
+  <!-- Marupadi -->
+  <div class="category" id="cat-Marupadi">
+    <h3>Marupadi</h3>
+    <div class="cards">
+      <div class="card" data-name="Roopa" data-role="Student - Marupadi">
+        <div class="card-top">
+          <!-- data-src kept raw; src is placeholder until JS sanitizes and assigns -->
+          <img data-src="Images/11.jpg"
+               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+               alt="Roopa" loading="lazy">
+          <h4>Roopa</h4>
+          <div class="full-desc" style="display:none">
+            <p>Roopa worked as a software developer in the IT industry for 6 years before she took a break. Her break lasted a decade, post which, she is enthusiastic to make a comeback.</p>
+          </div>
+        </div>
+        <div class="card-bottom">Student - Marupadi</div>
+      </div>
+
+      <div class="card" data-name="Anusuja Durai" data-role="Faculty - Marupadi">
+        <div class="card-top">
+          <img data-src="Images/6.jpg"
+               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+               alt="Anusuja Durai" loading="lazy">
+          <h4>Anusuja Durai</h4>
+          <div class="full-desc" style="display:none">
+            <p>Anusuja Durai has been a faculty member at the Marupadi division of Zoho Schools for the past 3 years. She has been responsible for coordinating activities like examinations, interviews, and classroom management. She helps ensure that classes run smoothly and supports both students and teachers in day-to-day activities. Her dedication has helped create a positive learning environment.</p>
+          </div>
+        </div>
+        <div class="card-bottom">Faculty - Marupadi</div>
+      </div>
+
+      <div class="card" data-name="Saranya A" data-role="Alumni - Marupadi">
+        <div class="card-top">
+          <img data-src="Images/3.jpg"
+               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+               alt="Saranya A" loading="lazy">
+          <h4>Saranya A</h4>
+          <div class="full-desc" style="display:none">
+            <p>With two years as a Programmer Analyst and six years of teaching math part-time, Saranya A has reignited her long-cherished dream through Marupadi. After an 11-year journey of detours, she’s back where she belongs.</p>
+          </div>
+        </div>
+        <div class="card-bottom">Alumni - Marupadi</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Student -->
+  <div class="category" id="cat-Student">
+    <h3>Student</h3>
+    <div class="cards">
+      <div class="card" data-name="Rina Sharon" data-role="Student - Business">
+        <div class="card-top">
+          <img data-src="Images/20.jpg"
+               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+               alt="Rina Sharon" loading="lazy">
+          <h4>Rina Sharon</h4>
+          <div class="full-desc" style="display:none">
+            <p>Hi, I’m Rina Sharon. People often describe me as cheerful and joyful, and I truly enjoy interacting with and getting to know people. I believe that this curiosity and love for connecting with others has played a big role in bringing me to where I am today—as a student at Zoho Schools of Business. I’m from Chennai, and I look forward to learning, growing, and building meaningful experiences here.</p>
+          </div>
+        </div>
+        <div class="card-bottom">Student - Business</div>
+      </div>
+
+      <div class="card" data-name="Vishnu S" data-role="Student - Design">
+        <div class="card-top">
+          <img data-src="Images/19.jpg"
+               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+               alt="Vishnu S" loading="lazy">
+          <h4>Vishnu S</h4>
+          <div class="full-desc" style="display:none">
+            <p>Vishnu is currently studying at Zoho School of Design, where he is continuously enhancing his skills and gaining valuable experience. He demonstrates a strong commitment to learning by proactively seeking clarity whenever needed, reflecting excellent learning etiquette and dedication to growth.</p>
+          </div>
+        </div>
+        <div class="card-bottom">Student - Design</div>
+      </div>
+
+      <div class="card" data-name="Dharshini" data-role="Student - Tech">
+        <div class="card-top">
+          <img data-src="Images/14.jpg"
+               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+               alt="Dharshini" loading="lazy">
+          <h4>Dharshini</h4>
+          <div class="full-desc" style="display:none">
+            <p>Hi, I am Dharshini, currently studying at Zoho School of Technology in Chennai. I am here to immerse myself in the world of technology and programming, especially through Zoho’s hands-on, practical learning environment. By being part of Zoho Schools, I’m not just preparing for a career, but building a foundation of skills that align deeply with my desires and the real-world software development.</p>
+          </div>
+        </div>
+        <div class="card-bottom">Student - Tech</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAS -->
+  <div class="category" id="cat-SAS">
+    <h3>SAS</h3>
+    <div class="cards">
+      <div class="card" data-name="Abhinaya Govindasamy" data-role="Student - SAS">
+        <div class="card-top">
+          <img data-src="Images/21.jpg"
+               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+               alt="Abhinaya Govindasamy" loading="lazy">
+          <h4>Abhinaya Govindasamy</h4>
+          <div class="full-desc" style="display:none">
+            <p>I am passionate about learning and creating across disciplines, whether through studying science, exploring coding and AI, or expressing myself through dance and music. I would describe myself as curious and reflective, with a strong interest in meaningful conversations, diverse perspectives, and challenging myself to grow. This led me to try for the Advanced Study Program (SAS), which has supported my commitment to deep, self-paced learning in AI/ML, strengthening both my academic foundation and personal development.</p>
+          </div>
+        </div>
+        <div class="card-bottom">Student - SAS</div>
+      </div>
+
+      <div class="card" data-name="Priakanth" data-role="Faculty - SAS">
+        <div class="card-top">
+          <img data-src="Images/9.jpg"
+               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+               alt="Priakanth" loading="lazy">
+          <h4>Priakanth</h4>
+          <div class="full-desc" style="display:none">
+            <p>With over two decades of rich industry experience, Priakanth, in his own words, is a "passionate and compassionate educator". His enthusiasm for teaching ignites a genuine curiosity and fosters a love for learning. He inspires his students to push their boundaries and reach greater heights. He takes pride in creating an engaging and supportive learning environment where each student feels valued and empowered to explore their potential. Beyond the classroom, he embraces his love for adventure and speed, finding immense joy in driving cars and motorcycles.</p>
+          </div>
+        </div>
+        <div class="card-bottom">Faculty - SAS</div>
+      </div>
+
+      <div class="card" data-name="Afsana Farheen" data-role="Alumni - SAS">
+        <div class="card-top">
+          <img data-src="Images/22.jpg"
+               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+               alt="Afsana Farheen" loading="lazy">
+          <h4>Afsana Farheen</h4>
+          <div class="full-desc" style="display:none">
+            <p>Hi, My name is Afsana Farheen. I am an iOS developer at Jambav, currently working on the Zoho ToDo app with over 4 years of experience. My journey began as a SAS student back when ZS was called ZU, and those learnings still guide me today. Beyond development, I often contribute with a designer’s eye and a marketer’s mindset, whenever opportunities arise. Many of my ideas have been well received, and I credit SAS for shaping this versatile way of thinking.</p>
+          </div>
+        </div>
+        <div class="card-bottom">Alumni - SAS</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Faculty -->
+  <div class="category" id="cat-Faculty">
+    <h3>Faculty</h3>
+    <div class="cards">
+      <div class="card" data-name="Geetha" data-role="Faculty - Business">
+        <div class="card-top">
+          <img data-src="Images/23.jpg"
+               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+               alt="Geetha" loading="lazy">
+          <h4>Geetha</h4>
+          <div class="full-desc" style="display:none">
+            <p>I am Geetha. I am a life skills trainer and a digital marketing faculty member. I support students in developing practical skills like communication, confidence, and adaptability, and guide them in learning digital marketing concepts that can help in their education and career growth. I have worked on several projects with students that were well received by the managers at ZOHO Corp. I also enjoy collaborating with others and learning from those around me.</p>
+          </div>
+        </div>
+        <div class="card-bottom">Faculty - Business</div>
+      </div>
+
+      <div class="card" data-name="Aarthi" data-role="Faculty - Tech">
+        <div class="card-top">
+          <img data-src="Images/2.jpg"
+               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+               alt="Aarthi" loading="lazy">
+          <h4>Aarthi</h4>
+          <div class="full-desc" style="display:none">
+            <p>Speak five minutes with her, and you would have heard references to her grandma twice already, her inspiration, her idol, and the person who molded her teaching aspirations at a very young age. Our vision of continuous learning attracted her from the get go, and after spending five years honing her skills in the art of software development, she switched gears to have a role in teaching it. While particularly proud of her contribution to Zoho's AI avatar, Zia, today, she wants to be known as a friendly faculty, a co-learner, and an insatiably enthusiastic person constantly in search of new things to learn.</p>
+          </div>
+        </div>
+        <div class="card-bottom">Faculty - Tech</div>
+      </div>
+
+      <div class="card" data-name="Aaron A" data-role="Faculty - Design">
+        <div class="card-top">
+          <img data-src="Images/15.jpg"
+               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+               alt="Aaron A" loading="lazy">
+          <h4>Aaron A</h4>
+          <div class="full-desc" style="display:none">
+            <p>Aaron San is a Design School UI/UX faculty member at Zoho Schools, with over 7 years of experience in the Design industry. He has guided two student batches, bringing valuable expertise and industry knowledge to the learning journey.</p>
+          </div>
+        </div>
+        <div class="card-bottom">Faculty - Design</div>
+      </div>
+    </div>
+  </div>
 
   <!-- Alumni -->
-  <div class="category">
+  <div class="category" id="cat-Alumni">
     <h3>Alumni</h3>
     <div class="cards">
-      <div class="card" data-name="John Doe" data-role="Alumni" data-description="John is an experienced professional who graduated in 2005. He has worked in multiple industries and provides mentorship in career development, leadership, and innovation." data-book="https://bookinglink.com/john-doe"><div class="card-top"><img src="https://picsum.photos/120" alt="Profile"><h4>John Doe</h4></div><div class="card-bottom">Alumni</div></div>
-      <div class="card" data-name="Jane Smith" data-role="Alumni" data-description="Jane has mentored students and guided them in their careers. She specializes in personal growth, networking, and skill development, helping students achieve their goals effectively." data-book="https://bookinglink.com/jane-smith"><div class="card-top"><img src="https://picsum.photos/121" alt="Profile"><h4>Jane Smith</h4></div><div class="card-bottom">Alumni</div></div>
-      <div class="card" data-name="Michael Lee" data-role="Alumni" data-description="Michael specializes in technology leadership and innovation. He guides students in tech careers and helps them develop skills for leadership roles." data-book="https://bookinglink.com/michael-lee"><div class="card-top"><img src="https://picsum.photos/122" alt="Profile"><h4>Michael Lee</h4></div><div class="card-bottom">Alumni</div></div>
-      <div class="card" data-name="Susan Green" data-role="Alumni" data-description="Susan has worked in multiple industries with a focus on growth. She advises students on career transitions and entrepreneurship." data-book="https://bookinglink.com/susan-green"><div class="card-top"><img src="https://picsum.photos/123" alt="Profile"><h4>Susan Green</h4></div><div class="card-bottom">Alumni</div></div>
-    </div>
-  </div>
+      <div class="card" data-name="Reijah Stanley" data-role="Alumni - Business">
+        <div class="card-top">
+          <img data-src="Images/10.jpg"
+               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+               alt="Reijah Stanley" loading="lazy">
+          <h4>Reijah Stanley</h4>
+          <div class="full-desc" style="display:none">
+            <p>Hey, I’m Reijah Stanley from the 2025 batch of Zoho Schools of Business. I’m from Bangalore and work as a Product Marketing Associate with the Zoho Apptics team at Jambav. I’m a jovial person who loves connecting with people, and outside of work, you’ll usually find me dancing with the Zoho dance crew.</p>
+          </div>
+        </div>
+        <div class="card-bottom">Alumni - Business</div>
+      </div>
 
-  <!-- Students -->
-  <div class="category">
-    <h3>Students</h3>
-    <div class="cards">
-      <div class="card" data-name="Amit Kumar" data-role="Student" data-description="Amit is a top-performing student with interests in software development and AI projects." data-book="https://bookinglink.com/amit-kumar"><div class="card-top"><img src="https://picsum.photos/124" alt="Profile"><h4>Amit Kumar</h4></div><div class="card-bottom">Student</div></div>
-      <div class="card" data-name="Priya Sharma" data-role="Student" data-description="Priya actively participates in tech clubs and has a keen interest in cloud computing and entrepreneurship." data-book="https://bookinglink.com/priya-sharma"><div class="card-top"><img src="https://picsum.photos/125" alt="Profile"><h4>Priya Sharma</h4></div><div class="card-bottom">Student</div></div>
-      <div class="card" data-name="Rahul Mehta" data-role="Student" data-description="Rahul is interested in data science and analytics. He has completed multiple online courses and internships." data-book="https://bookinglink.com/rahul-mehta"><div class="card-top"><img src="https://picsum.photos/126" alt="Profile"><h4>Rahul Mehta</h4></div><div class="card-bottom">Student</div></div>
-    </div>
-  </div>
+      <div class="card" data-name="Mrithul Aananth.S" data-role="Alumni - Design">
+        <div class="card-top">
+          <img data-src="Images/17.jpg"
+               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+               alt="Mrithul Aananth.S" loading="lazy">
+          <h4>Mrithul Aananth.S</h4>
+          <div class="full-desc" style="display:none">
+            <p>Mrithul studied for a year at Zoho Schools and successfully completed his one-year learning journey with Graphikos Team. He is now a Product Designer at Graphikos – Design Team, where he focuses on building intuitive UI pages that enhance and simplify customer experiences.</p>
+          </div>
+        </div>
+        <div class="card-bottom">Alumni - Design</div>
+      </div>
 
-  <!-- Parents -->
-  <div class="category">
-    <h3>Parents</h3>
-    <div class="cards">
-      <div class="card" data-name="Anita Roy" data-role="Parent" data-description="Anita actively engages in her child's learning and participates in community events." data-book="https://bookinglink.com/anita-roy"><div class="card-top"><img src="https://picsum.photos/127" alt="Profile"><h4>Anita Roy</h4></div><div class="card-bottom">Parent</div></div>
-      <div class="card" data-name="Ramesh Gupta" data-role="Parent" data-description="Ramesh supports students in academic planning and extracurricular activities, providing guidance when needed." data-book="https://bookinglink.com/ramesh-gupta"><div class="card-top"><img src="https://picsum.photos/128" alt="Profile"><h4>Ramesh Gupta</h4></div><div class="card-bottom">Parent</div></div>
-      <div class="card" data-name="Neha Agarwal" data-role="Parent" data-description="Neha is actively involved in mentoring sessions and helps students develop time management skills." data-book="https://bookinglink.com/neha-agarwal"><div class="card-top"><img src="https://picsum.photos/129" alt="Profile"><h4>Neha Agarwal</h4></div><div class="card-bottom">Parent</div></div>
-      <div class="card" data-name="Vikram Singh" data-role="Parent" data-description="Vikram provides support in career guidance and skill development activities for students." data-book="https://bookinglink.com/vikram-singh"><div class="card-top"><img src="https://picsum.photos/130" alt="Profile"><h4>Vikram Singh</h4></div><div class="card-bottom">Parent</div></div>
-    </div>
-  </div>
+      <div class="card" data-name="Sethuraman" data-role="Alumni - Tech">
+        <div class="card-top">
+          <img data-src="Images/12.jpg"
+               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+               alt="Sethuraman" loading="lazy">
+          <h4>Sethuraman</h4>
+          <div class="full-desc" style="display:none">
+            <p>I'm a homeschooled student with a deep passion for both creative and technical pursuits. In the kitchen, I love experimenting with new recipes and flavors, a passion for creation that carries over into my other work. I'm currently channeling that creative energy into building an AI-based code generator for an IDE, a project that combines my love for technology with a goal of making the development process more efficient.</p>
+          </div>
+        </div>
+        <div class="card-bottom">Alumni - Tech</div>
+      </div>
 
-  <!-- Teachers -->
-  <div class="category">
-    <h3>Teachers</h3>
-    <div class="cards">
-      <div class="card" data-name="Arun Menon" data-role="Teacher" data-description="Arun specializes in computer science education and guides students on project-based learning." data-book="https://bookinglink.com/arun-menon"><div class="card-top"><img src="https://picsum.photos/131" alt="Profile"><h4>Arun Menon</h4></div><div class="card-bottom">Teacher</div></div>
-      <div class="card" data-name="Kavita Joshi" data-role="Teacher" data-description="Kavita focuses on mentoring students in mathematics and analytical skills development." data-book="https://bookinglink.com/kavita-joshi"><div class="card-top"><img src="https://picsum.photos/132" alt="Profile"><h4>Kavita Joshi</h4></div><div class="card-bottom">Teacher</div></div>
-      <div class="card" data-name="Manoj Pillai" data-role="Teacher" data-description="Manoj guides students in physics and interdisciplinary problem solving." data-book="https://bookinglink.com/manoj-pillai"><div class="card-top"><img src="https://picsum.photos/133" alt="Profile"><h4>Manoj Pillai</h4></div><div class="card-bottom">Teacher</div></div>
-    </div>
-  </div>
-
-  <!-- Managers -->
-  <div class="category">
-    <h3>Managers</h3>
-    <div class="cards">
-      <div class="card" data-name="Sanjay Rao" data-role="Manager" data-description="Sanjay specializes in operations and team management, mentoring students in leadership and strategy." data-book="https://bookinglink.com/sanjay-rao"><div class="card-top"><img src="https://picsum.photos/134" alt="Profile"><h4>Sanjay Rao</h4></div><div class="card-bottom">Manager</div></div>
-      <div class="card" data-name="Deepa Nair" data-role="Manager" data-description="Deepa guides students in project management and professional skills development." data-book="https://bookinglink.com/deepa-nair"><div class="card-top"><img src="https://picsum.photos/135" alt="Profile"><h4>Deepa Nair</h4></div><div class="card-bottom">Manager</div></div>
-      <div class="card" data-name="Abhay Verma" data-role="Manager" data-description="Abhay helps students understand organizational strategy and business growth opportunities." data-book="https://bookinglink.com/abhay-verma"><div class="card-top"><img src="https://picsum.photos/136" alt="Profile"><h4>Abhay Verma</h4></div><div class="card-bottom">Manager</div></div>
-    </div>
-  </div>
-
-  <!-- Sas -->
-  <div class="category">
-    <h3>Sas</h3>
-    <div class="cards">
-      <div class="card" data-name="Sharath Kumar" data-role="Sas" data-description="Sharath mentors students in software development and professional growth." data-book="https://bookinglink.com/sharath-kumar"><div class="card-top"><img src="https://picsum.photos/137" alt="Profile"><h4>Sharath Kumar</h4></div><div class="card-bottom">Sas</div></div>
-      <div class="card" data-name="Latha Krishnan" data-role="Sas" data-description="Latha guides students in leadership, teamwork, and skill enhancement." data-book="https://bookinglink.com/latha-krishnan"><div class="card-top"><img src="https://picsum.photos/138" alt="Profile"><h4>Latha Krishnan</h4></div><div class="card-bottom">Sas</div></div>
-      <div class="card" data-name="Ravi Shankar" data-role="Sas" data-description="Ravi specializes in mentoring students for technology careers and personal growth." data-book="https://bookinglink.com/ravi-shankar"><div class="card-top"><img src="https://picsum.photos/139" alt="Profile"><h4>Ravi Shankar</h4></div><div class="card-bottom">Sas</div></div>
+      <div class="card" data-name="Sai Dimple" data-role="Alumni - Tech">
+        <div class="card-top">
+          <img data-src="Images/13.jpg"
+               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+               alt="Sai Dimple" loading="lazy">
+          <h4>Sai Dimple</h4>
+          <div class="full-desc" style="display:none">
+            <p>I am Sai Dimple. I am working at Zoho Mail as a Backend Developer working in the Kernel of Zoho Mail in features like Mail send, Filters, Signature and few more. I am having a great time working here from last five years building and learning new things everyday.</p>
+          </div>
+        </div>
+        <div class="card-bottom">Alumni - Tech</div>
+      </div>
     </div>
   </div>
 
   <!-- Other Locations -->
-  <div class="category">
+  <div class="category" id="cat-OtherLocations">
     <h3>Other Locations</h3>
     <div class="cards">
-      <div class="card" data-name="Meena Das" data-role="Other Location" data-description="Meena provides guidance to students on study techniques and career choices." data-book="https://bookinglink.com/meena-das"><div class="card-top"><img src="https://picsum.photos/140" alt="Profile"><h4>Meena Das</h4></div><div class="card-bottom">Other Location</div></div>
-      <div class="card" data-name="Ajay Prasad" data-role="Other Location" data-description="Ajay mentors students in skill development and entrepreneurship guidance." data-book="https://bookinglink.com/ajay-prasad"><div class="card-top"><img src="https://picsum.photos/141" alt="Profile"><h4>Ajay Prasad</h4></div><div class="card-bottom">Other Location</div></div>
+      <div class="card" data-name="Prathika" data-role="Head - Kumbakonam">
+        <div class="card-top">
+          <img data-src="Images/8.jpg"
+               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+               alt="Prathika" loading="lazy">
+          <h4>Prathika</h4>
+          <div class="full-desc" style="display:none">
+            <p>Prathika started her career at Zoho right after college, as a faculty member at the School of Technology in Chennai. She has spent almost a decade diving into various technologies and has gained diverse knowledge in product development, including SNMP-based applications, Windows and Mac-based apps, ME IT monitoring tools, Android mobile applications, and the latest APIs. She teaches server-based application development, incorporating live product APIs into capstone projects, and actively motivates and supports her students by being a co-learner. Her quest for new horizons has now led her to head the Zoho School of Technology in Kumbakonam.</p>
+          </div>
+        </div>
+        <div class="card-bottom">Head - Kumbakonam</div>
+      </div>
+
+      <div class="card" data-name="Miraculine" data-role="Head - Tharuvai">
+        <div class="card-top">
+          <img data-src="Images/7.jpg"
+               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+               alt="Miraculine" loading="lazy">
+          <h4>Miraculine</h4>
+          <div class="full-desc" style="display:none">
+            <p>Miraculine is a dual catalyst helping students at Tharuvai master Zoho Creator, Frontend Development, essential tech tools on the one hand, and sales, marketing, and customer support skills on the other. Passionate about code and the latest tech trends, she brings vibrant energy to every session. Embracing a philosophy of curiosity and collaboration, she cultivates an environment where learning is a shared journey of exploration and growth. Beyond the classroom, she continues her quest for knowledge, constantly seeking fresh perspectives to enrich her lessons. When not coding algorithms or teaching the dark art of Search Engine Optimization, Miraculine unwinds in the intricate world of Zentangle Art where even the simplest patterns bring complex joy!</p>
+          </div>
+        </div>
+        <div class="card-bottom">Head - Tharuvai</div>
+      </div>
     </div>
   </div>
 
   <!-- GS/PMIP -->
-  <div class="category">
+  <div class="category" id="cat-GSPMIP">
     <h3>GS/PMIP</h3>
     <div class="cards">
-      <div class="card" data-name="Sonia Reddy" data-role="GS/PMIP" data-description="Sonia helps students with career planning, mentorship, and skill development." data-book="https://bookinglink.com/sonia-reddy"><div class="card-top"><img src="https://picsum.photos/142" alt="Profile"><h4>Sonia Reddy</h4></div><div class="card-bottom">GS/PMIP</div></div>
-      <div class="card" data-name="Vivek Bhat" data-role="GS/PMIP" data-description="Vivek has extensive experience in project management and guides students in career planning." data-book="https://bookinglink.com/vivek-bhat"><div class="card-top"><img src="https://picsum.photos/143" alt="Profile"><h4>Vivek Bhat</h4></div><div class="card-bottom">GS/PMIP</div></div>
-      <div class="card" data-name="Pooja Iyer" data-role="GS/PMIP" data-description="Pooja specializes in professional mentorship and career guidance for students." data-book="https://bookinglink.com/pooja-iyer"><div class="card-top"><img src="https://picsum.photos/144" alt="Profile"><h4>Pooja Iyer</h4></div><div class="card-bottom">GS/PMIP</div></div>
+      <div class="card" data-name="Roohi Fathima" data-role="Faculty - GS/PMIP">
+        <div class="card-top">
+          <img data-src="Images/5.jpg"
+               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+               alt="Roohi Fathima" loading="lazy">
+          <h4>Roohi Fathima</h4>
+          <div class="full-desc" style="display:none"> 
+            <p>Driven by her passion for teaching, Roohi transitioned from a successful 7-year career as a Software Developer at Zoho to join Zoho Schools as a faculty member. Roohi has an infectious exuberance and a natural ability to connect with students. Her vibrant personality extends beyond the classroom. If it is not her professional Bharatanatyam dancing that gets her on stage all decked out, it will be the traditional Parai Drum performance that she dances with great abandon.</p>
+          </div>
+        </div>
+        <div class="card-bottom">Faculty - GS/PMIP</div>
+      </div>
+
+      <div class="card" data-name="Devendran" data-role="Alumni - GS/PMIP">
+        <div class="card-top">
+          <img data-src="Images/4.jpg"
+               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+               alt="Devendran" loading="lazy">
+          <h4>Devendran</h4>
+          <div class="full-desc" style="display:none">
+            <p>I’m Devendran from Chennai. I completed my bachelor’s degree in Civil Engineering at Vel Tech. After that, I came to know about ZSGS and decided to join. The program provided me with valuable guidance, focusing on live applications, problem-solving, and technology-oriented training. Thanks to this experience, I’m now working as an iOS Developer at Zoho.</p>
+          </div>
+        </div>
+        <div class="card-bottom">Alumni - GS/PMIP</div>
+      </div>
+
+      <div class="card" data-name="Priyadharshni" data-role="Student - GS/PMIP">
+        <div class="card-top">
+          <img data-src="Images/1.jpg"
+               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+               alt="Priyadharshni" loading="lazy">
+          <h4>Priyadharshni</h4>
+          <div class="full-desc" style="display:none">
+            <p>Hailing from the charming city of Pondicherry, Priyadharshni has finished her Bachelors in BTech Computer Science and Business Systems. Just as confident as she was about her passion for computer science, she was equally confident about joining Zoho — a passion that has now brought her to Zoho School for Graduate Studies. Fearless and outspoken, she never shies away from the spotlight. Her co-curricular journey is just as vibrant — from earning her FIDE chess rating and representing her state in SGFI, to exploring her passion for music through the guitar and piano, she brings creativity and discipline into everything she pursues.</p>
+          </div>
+        </div>
+        <div class="card-bottom">Student - GS/PMIP</div>
+      </div>
     </div>
   </div>
 
-  <!-- Marupadi -->
-  <div class="category">
-    <h3>Marupadi</h3>
+  <!-- Manager -->
+  <div class="category" id="cat-Manager">
+    <h3>Manager</h3>
     <div class="cards">
-      <div class="card" data-name="Hari Krishnan" data-role="Marupadi" data-description="Hari guides students in entrepreneurship and leadership skills." data-book="https://bookinglink.com/hari-krishnan"><div class="card-top"><img src="https://picsum.photos/145" alt="Profile"><h4>Hari Krishnan</h4></div><div class="card-bottom">Marupadi</div></div>
-      <div class="card" data-name="Meera S" data-role="Marupadi" data-description="Meera focuses on mentoring students in creative thinking and innovation." data-book="https://bookinglink.com/meera-s"><div class="card-top"><img src="https://picsum.photos/146" alt="Profile"><h4>Meera S</h4></div><div class="card-bottom">Marupadi</div></div>
-      <div class="card" data-name="Kiran Dev" data-role="Marupadi" data-description="Kiran provides guidance in professional skills and project-based learning." data-book="https://bookinglink.com/kiran-dev"><div class="card-top"><img src="https://picsum.photos/147" alt="Profile"><h4>Kiran Dev</h4></div><div class="card-bottom">Marupadi</div></div>
+      <div class="card" data-name="Govindaraj Siddhan" data-role="Manager - Zoho Creative">
+        <div class="card-top">
+          <img data-src="Images/16.jpg"
+               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+               alt="Govindaraj Siddhan" loading="lazy">
+          <h4>Govindaraj Siddhan</h4>
+          <div class="full-desc" style="display:none">
+            <p>Govind is an Member Leadership Staff at Zoho, where he has mentored numerous students from Zoho School of Design, guiding them to grow both within the team and in their professional journey. His consistent guidance, leadership, and unwavering support have made a significant impact.</p>
+          </div>
+        </div>
+        <div class="card-bottom">Manager - Zoho Creative</div>
+      </div>
+
+      <div class="card" data-name="Vijayakumar" data-role="Manager - Cyber-Defence department">
+        <div class="card-top">
+          <img data-src="Images/24.jpg"
+               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+               alt="Vijayakumar" loading="lazy">
+          <h4>Vijayakumar</h4>
+          <div class="full-desc" style="display:none">
+            <p>I started my career with Zoho in 2005, my very first company, and have been growing with it ever since. Over the years, I’ve worked on multiple NMS projects and contributed to several ManageEngine products. Currently, I’m part of the Cyber-Defence department in the Zoho Security Team, where I focus on strengthening security and safeguarding all Zoho Data Centers.</p>
+          </div>
+        </div>
+        <div class="card-bottom">Manager - Cyber-Defence department</div>
+      </div>
     </div>
   </div>
 
-  <!-- Zoho Campus -->
-  <div class="category">
-    <h3>Zoho Campus</h3>
+  <!-- Parent -->
+  <div class="category" id="cat-Parent">
+    <h3>Parent</h3>
     <div class="cards">
-      <div class="card" data-name="Rohit Menon" data-role="Zoho Campus" data-description="Rohit guides students in technology careers and innovation projects." data-book="https://bookinglink.com/rohit-menon"><div class="card-top"><img src="https://picsum.photos/148" alt="Profile"><h4>Rohit Menon</h4></div><div class="card-bottom">Zoho Campus</div></div>
-      <div class="card" data-name="Anjali Nair" data-role="Zoho Campus" data-description="Anjali mentors students in professional growth and skill development." data-book="https://bookinglink.com/anjali-nair"><div class="card-top"><img src="https://picsum.photos/149" alt="Profile"><h4>Anjali Nair</h4></div><div class="card-bottom">Zoho Campus</div></div>
+      <div class="card" data-name="Ramachandran" data-role="Parent">
+        <div class="card-top">
+          <img data-src="Images/18.jpg"
+               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+               alt="Ramachandran" loading="lazy">
+          <h4>Ramachandran</h4>
+          <div class="full-desc" style="display:none">
+            <p>Ramachandran, a designer at Zoho with over a decade of experience, is the parent of Tharun Kumar, a current student at Zoho School of Design. We are delighted to have his son join this batch at Zoho School of Learning.</p>
+          </div>
+        </div>
+        <div class="card-bottom">Parent</div>
+      </div>
     </div>
   </div>
 
-  <!-- 3rd Person Perspective -->
-  <div class="category">
-    <h3>3rd Person Perspective</h3>
-    <div class="cards">
-      <div class="card" data-name="Karthik S" data-role="3rd Person Perspective" data-description="Karthik provides mentorship from an observational perspective, helping students reflect on experiences and growth." data-book="https://bookinglink.com/karthik-s"><div class="card-top"><img src="https://picsum.photos/150" alt="Profile"><h4>Karthik S</h4></div><div class="card-bottom">3rd Person Perspective</div></div>
-    </div>
-  </div>
-
-  <!-- Detailed Member Modal -->
-  <div id="profileModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn">&times;</span>
-      <img id="modalImage" src="" alt="Profile">
+  <!-- ======= Modals ======= -->
+  <div id="profileModal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true">
+      <span class="close-btn" aria-label="Close profile modal">&times;</span>
+      <img id="modalImage" src="" alt="Profile image">
       <h3 id="modalName"></h3>
       <h4 id="modalRole"></h4>
       <p id="modalDescription"></p>
-      <a id="bookButton" href="#" target="_blank" class="book-btn">Book</a>
     </div>
   </div>
 
-  <!-- Instructions Modal -->
-  <div id="instructionsModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" id="closeInstructions">&times;</span>
+  <div id="instructionsModal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true">
+      <span class="close-btn" id="closeInstructions" aria-label="Close instructions">&times;</span>
       <h3>Instructions</h3>
-      <ol style="text-align:left; font-size:16px; line-height:1.6;">
+      <ol style="text-align:left;font-size:16px;line-height:1.6">
         <li>Select a member to view detailed information.</li>
-        <li>Click the "Book" button to schedule your 1-to-1 session.</li>
+        <li>Use the booking iframe above to schedule your 1-to-1 session.</li>
         <li>Close the modal by clicking the X or outside the modal area.</li>
       </ol>
     </div>
   </div>
 
   <script>
-    // Member Modal
-    const modal = document.getElementById("profileModal");
-    const modalImage = document.getElementById("modalImage");
-    const modalName = document.getElementById("modalName");
-    const modalRole = document.getElementById("modalRole");
-    const modalDescription = document.getElementById("modalDescription");
-    const bookButton = document.getElementById("bookButton");
-    const closeBtn = modal.querySelector(".close-btn");
+    // sanitize helper
+    function sanitizeUrl(url){
+      if(!url) return '';
+      // remove zero-width and line separator unicode characters and BOM
+      const cleaned = url.replace(/[\u200B-\u200F\uFEFF\u2028\u2029]/g, '').trim();
+      // replace literal spaces with %20
+      return cleaned.replace(/\s/g, '%20');
+    }
 
-    document.querySelectorAll(".card").forEach(card => {
-      card.addEventListener("click", () => {
-        modalImage.src = card.querySelector("img").src;
-        modalName.textContent = card.dataset.name;
-        modalRole.textContent = card.dataset.role;
-        modalDescription.textContent = card.dataset.description;
-        bookButton.href = card.dataset.book;
-        modal.classList.add("show");
+    // assign sanitized src to images with data-src
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('img[data-src]').forEach(img => {
+        const raw = img.getAttribute('data-src') || '';
+        const safe = sanitizeUrl(raw);
+        if(safe){
+          img.src = safe;
+        } else {
+          // fallback inline svg
+          img.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect width="100%" height="100%" fill="%23e6e9ee"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23888" font-family="Arial" font-size="14">Image not available</text></svg>';
+        }
+        img.addEventListener('error', () => {
+          console.warn('Image failed to load:', raw);
+          img.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect width="100%" height="100%" fill="%23e6e9ee"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23888" font-family="Arial" font-size="14">Image not available</text></svg>';
+        });
       });
+
+      // now wire up modal behavior after images are set
+      (function(){
+        const modal = document.getElementById('profileModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalName = document.getElementById('modalName');
+        const modalRole = document.getElementById('modalRole');
+        const modalDescription = document.getElementById('modalDescription');
+        const closeBtn = modal.querySelector('.close-btn');
+
+        function openProfile(card){
+          const imgEl = card.querySelector('img');
+          const name = card.dataset.name || '';
+          const role = card.dataset.role || '';
+          const fullDescEl = card.querySelector('.full-desc');
+          const fullDescHTML = fullDescEl ? fullDescEl.innerHTML : '';
+          modalImage.src = imgEl ? imgEl.src : '';
+          modalName.textContent = name;
+          modalRole.textContent = role;
+          modalDescription.innerHTML = fullDescHTML;
+          modal.classList.add('show');
+          document.body.style.overflow = 'hidden';
+          modal.setAttribute('aria-hidden','false');
+        }
+        function closeProfile(){
+          modal.classList.remove('show');
+          document.body.style.overflow = '';
+          modal.setAttribute('aria-hidden','true');
+        }
+
+        document.querySelectorAll('.card').forEach(card => {
+          card.addEventListener('click', () => openProfile(card));
+        });
+        closeBtn.addEventListener('click', closeProfile);
+        window.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeProfile(); });
+        window.addEventListener('click', (e) => { if(e.target === modal) closeProfile(); });
+
+        // Instructions modal
+        const instructionsModal = document.getElementById('instructionsModal');
+        const closeInstructions = document.getElementById('closeInstructions');
+
+        function openInstructions(){ instructionsModal.classList.add('show'); instructionsModal.setAttribute('aria-hidden','false'); document.body.style.overflow = 'hidden'; }
+        function closeInstructionsFn(){ instructionsModal.classList.remove('show'); instructionsModal.setAttribute('aria-hidden','true'); document.body.style.overflow = ''; }
+
+        // Show after 1 second
+        setTimeout(openInstructions, 1000);
+
+        closeInstructions.addEventListener('click', closeInstructionsFn);
+        window.addEventListener('click', (e) => { if(e.target === instructionsModal) closeInstructionsFn(); });
+        window.addEventListener('keydown', (e) => { if(e.key==='Escape' && instructionsModal.classList.contains('show')) closeInstructionsFn(); });
+      })();
     });
-
-    closeBtn.addEventListener("click", () => { modal.classList.remove("show"); });
-    window.addEventListener("click", e => { if(e.target === modal) modal.classList.remove("show"); });
-
-    // Instructions Modal
-    const instructionsModal = document.getElementById("instructionsModal");
-    const closeInstructions = document.getElementById("closeInstructions");
-
-    window.addEventListener("load", () => {
-      setTimeout(() => { instructionsModal.classList.add("show"); }, 1000);
-    });
-
-    closeInstructions.addEventListener("click", () => { instructionsModal.classList.remove("show"); });
-    window.addEventListener("click", e => { if(e.target === instructionsModal) instructionsModal.classList.remove("show"); });
   </script>
 </body>
 </html>
