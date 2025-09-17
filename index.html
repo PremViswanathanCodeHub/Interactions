@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>List of Members for 1to1 Interaction</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 30px 150px; background-color: #f0f4f9; }
+    h1 { text-align: center; margin-bottom: 5px; }
+    h2 { text-align: center; font-weight: normal; color: #666; margin-bottom: 40px; }
+    .category { margin-bottom: 50px; }
+    .category h3 { font-size: 1.4em; font-weight: bold; margin-bottom: 20px; color: #333; }
+    .cards { display: flex; flex-wrap: wrap; gap: 10px; }
+    .card { background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); width: 250px; height: 320px; display: flex; flex-direction: column; overflow: hidden; transition: transform 0.2s; cursor: pointer; }
+    .card:hover { transform: translateY(-5px); }
+    .card-top { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 25px 15px 10px; }
+    .card-top img { width: 140px; height: 140px; border-radius: 50%; margin-bottom: 12px; object-fit: cover; }
+    .card-top h4 { font-size: 1.3em; margin: 0; font-weight: bold; text-align: center; }
+    .card-bottom { background: #f1f1f1; padding: 12px; text-align: center; font-size: 1em; font-weight: 500; color: #444; }
+
+    /* Modal */
+    .modal { display: flex; align-items: center; justify-content: center; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+    .modal.show { opacity: 1; pointer-events: all; }
+    .modal-content { background: #fff; border-radius: 16px; padding: 30px; width: 500px; max-width: 90%; text-align: center; position: relative; box-shadow: 0 6px 18px rgba(0,0,0,0.2); transform: scale(0.8); transition: transform 0.3s ease; }
+    .modal.show .modal-content { transform: scale(1); }
+    .modal-content img { width: 200px; height: 200px; border-radius: 50%; margin-bottom: 20px; object-fit: cover; }
+    .modal-content h3 { margin: 10px 0; font-size: 28px; font-weight: bold; }
+    .modal-content h4 { margin: 5px 0 15px; font-size: 20px; color: #555; font-weight: 500; }
+    .modal-content p { font-size: 16px; color: #444; line-height: 1.6; text-align: left; }
+    .book-btn { display: inline-block; margin-top: 20px; padding: 12px 25px; background-color: #225795; color: #fff; border-radius: 8px; text-decoration: none; font-weight: bold; transition: background 0.2s; }
+    .book-btn:hover { background-color: #0f3f6d; }
+    .close-btn { position: absolute; top: 15px; right: 20px; font-size: 22px; cursor: pointer; font-weight: bold; color: #888; }
+    .close-btn:hover { color: #000; }
+  </style>
+</head>
+<body>
+  <h1>List of members for 1to1 interaction</h1>
+  <h2>Select and book a member for one to one interaction from the list below</h2>
+
+  <!-- Alumni -->
+  <div class="category">
+    <h3>Alumni</h3>
+    <div class="cards">
+      <div class="card" data-name="John Doe" data-role="Alumni" data-description="John is an experienced professional who graduated in 2005. He has worked in multiple industries and provides mentorship in career development, leadership, and innovation." data-book="https://bookinglink.com/john-doe"><div class="card-top"><img src="https://picsum.photos/120" alt="Profile"><h4>John Doe</h4></div><div class="card-bottom">Alumni</div></div>
+      <div class="card" data-name="Jane Smith" data-role="Alumni" data-description="Jane has mentored students and guided them in their careers. She specializes in personal growth, networking, and skill development, helping students achieve their goals effectively." data-book="https://bookinglink.com/jane-smith"><div class="card-top"><img src="https://picsum.photos/121" alt="Profile"><h4>Jane Smith</h4></div><div class="card-bottom">Alumni</div></div>
+      <div class="card" data-name="Michael Lee" data-role="Alumni" data-description="Michael specializes in technology leadership and innovation. He guides students in tech careers and helps them develop skills for leadership roles." data-book="https://bookinglink.com/michael-lee"><div class="card-top"><img src="https://picsum.photos/122" alt="Profile"><h4>Michael Lee</h4></div><div class="card-bottom">Alumni</div></div>
+      <div class="card" data-name="Susan Green" data-role="Alumni" data-description="Susan has worked in multiple industries with a focus on growth. She advises students on career transitions and entrepreneurship." data-book="https://bookinglink.com/susan-green"><div class="card-top"><img src="https://picsum.photos/123" alt="Profile"><h4>Susan Green</h4></div><div class="card-bottom">Alumni</div></div>
+    </div>
+  </div>
+
+  <!-- Students -->
+  <div class="category">
+    <h3>Students</h3>
+    <div class="cards">
+      <div class="card" data-name="Amit Kumar" data-role="Student" data-description="Amit is a top-performing student with interests in software development and AI projects." data-book="https://bookinglink.com/amit-kumar"><div class="card-top"><img src="https://picsum.photos/124" alt="Profile"><h4>Amit Kumar</h4></div><div class="card-bottom">Student</div></div>
+      <div class="card" data-name="Priya Sharma" data-role="Student" data-description="Priya actively participates in tech clubs and has a keen interest in cloud computing and entrepreneurship." data-book="https://bookinglink.com/priya-sharma"><div class="card-top"><img src="https://picsum.photos/125" alt="Profile"><h4>Priya Sharma</h4></div><div class="card-bottom">Student</div></div>
+      <div class="card" data-name="Rahul Mehta" data-role="Student" data-description="Rahul is interested in data science and analytics. He has completed multiple online courses and internships." data-book="https://bookinglink.com/rahul-mehta"><div class="card-top"><img src="https://picsum.photos/126" alt="Profile"><h4>Rahul Mehta</h4></div><div class="card-bottom">Student</div></div>
+    </div>
+  </div>
+
+  <!-- Parents -->
+  <div class="category">
+    <h3>Parents</h3>
+    <div class="cards">
+      <div class="card" data-name="Anita Roy" data-role="Parent" data-description="Anita actively engages in her child's learning and participates in community events." data-book="https://bookinglink.com/anita-roy"><div class="card-top"><img src="https://picsum.photos/127" alt="Profile"><h4>Anita Roy</h4></div><div class="card-bottom">Parent</div></div>
+      <div class="card" data-name="Ramesh Gupta" data-role="Parent" data-description="Ramesh supports students in academic planning and extracurricular activities, providing guidance when needed." data-book="https://bookinglink.com/ramesh-gupta"><div class="card-top"><img src="https://picsum.photos/128" alt="Profile"><h4>Ramesh Gupta</h4></div><div class="card-bottom">Parent</div></div>
+      <div class="card" data-name="Neha Agarwal" data-role="Parent" data-description="Neha is actively involved in mentoring sessions and helps students develop time management skills." data-book="https://bookinglink.com/neha-agarwal"><div class="card-top"><img src="https://picsum.photos/129" alt="Profile"><h4>Neha Agarwal</h4></div><div class="card-bottom">Parent</div></div>
+      <div class="card" data-name="Vikram Singh" data-role="Parent" data-description="Vikram provides support in career guidance and skill development activities for students." data-book="https://bookinglink.com/vikram-singh"><div class="card-top"><img src="https://picsum.photos/130" alt="Profile"><h4>Vikram Singh</h4></div><div class="card-bottom">Parent</div></div>
+    </div>
+  </div>
+
+  <!-- Teachers -->
+  <div class="category">
+    <h3>Teachers</h3>
+    <div class="cards">
+      <div class="card" data-name="Arun Menon" data-role="Teacher" data-description="Arun specializes in computer science education and guides students on project-based learning." data-book="https://bookinglink.com/arun-menon"><div class="card-top"><img src="https://picsum.photos/131" alt="Profile"><h4>Arun Menon</h4></div><div class="card-bottom">Teacher</div></div>
+      <div class="card" data-name="Kavita Joshi" data-role="Teacher" data-description="Kavita focuses on mentoring students in mathematics and analytical skills development." data-book="https://bookinglink.com/kavita-joshi"><div class="card-top"><img src="https://picsum.photos/132" alt="Profile"><h4>Kavita Joshi</h4></div><div class="card-bottom">Teacher</div></div>
+      <div class="card" data-name="Manoj Pillai" data-role="Teacher" data-description="Manoj guides students in physics and interdisciplinary problem solving." data-book="https://bookinglink.com/manoj-pillai"><div class="card-top"><img src="https://picsum.photos/133" alt="Profile"><h4>Manoj Pillai</h4></div><div class="card-bottom">Teacher</div></div>
+    </div>
+  </div>
+
+  <!-- Managers -->
+  <div class="category">
+    <h3>Managers</h3>
+    <div class="cards">
+      <div class="card" data-name="Sanjay Rao" data-role="Manager" data-description="Sanjay specializes in operations and team management, mentoring students in leadership and strategy." data-book="https://bookinglink.com/sanjay-rao"><div class="card-top"><img src="https://picsum.photos/134" alt="Profile"><h4>Sanjay Rao</h4></div><div class="card-bottom">Manager</div></div>
+      <div class="card" data-name="Deepa Nair" data-role="Manager" data-description="Deepa guides students in project management and professional skills development." data-book="https://bookinglink.com/deepa-nair"><div class="card-top"><img src="https://picsum.photos/135" alt="Profile"><h4>Deepa Nair</h4></div><div class="card-bottom">Manager</div></div>
+      <div class="card" data-name="Abhay Verma" data-role="Manager" data-description="Abhay helps students understand organizational strategy and business growth opportunities." data-book="https://bookinglink.com/abhay-verma"><div class="card-top"><img src="https://picsum.photos/136" alt="Profile"><h4>Abhay Verma</h4></div><div class="card-bottom">Manager</div></div>
+    </div>
+  </div>
+
+  <!-- Sas -->
+  <div class="category">
+    <h3>Sas</h3>
+    <div class="cards">
+      <div class="card" data-name="Sharath Kumar" data-role="Sas" data-description="Sharath mentors students in software development and professional growth." data-book="https://bookinglink.com/sharath-kumar"><div class="card-top"><img src="https://picsum.photos/137" alt="Profile"><h4>Sharath Kumar</h4></div><div class="card-bottom">Sas</div></div>
+      <div class="card" data-name="Latha Krishnan" data-role="Sas" data-description="Latha guides students in leadership, teamwork, and skill enhancement." data-book="https://bookinglink.com/latha-krishnan"><div class="card-top"><img src="https://picsum.photos/138" alt="Profile"><h4>Latha Krishnan</h4></div><div class="card-bottom">Sas</div></div>
+      <div class="card" data-name="Ravi Shankar" data-role="Sas" data-description="Ravi specializes in mentoring students for technology careers and personal growth." data-book="https://bookinglink.com/ravi-shankar"><div class="card-top"><img src="https://picsum.photos/139" alt="Profile"><h4>Ravi Shankar</h4></div><div class="card-bottom">Sas</div></div>
+    </div>
+  </div>
+
+  <!-- Other Locations -->
+  <div class="category">
+    <h3>Other Locations</h3>
+    <div class="cards">
+      <div class="card" data-name="Meena Das" data-role="Other Location" data-description="Meena provides guidance to students on study techniques and career choices." data-book="https://bookinglink.com/meena-das"><div class="card-top"><img src="https://picsum.photos/140" alt="Profile"><h4>Meena Das</h4></div><div class="card-bottom">Other Location</div></div>
+      <div class="card" data-name="Ajay Prasad" data-role="Other Location" data-description="Ajay mentors students in skill development and entrepreneurship guidance." data-book="https://bookinglink.com/ajay-prasad"><div class="card-top"><img src="https://picsum.photos/141" alt="Profile"><h4>Ajay Prasad</h4></div><div class="card-bottom">Other Location</div></div>
+    </div>
+  </div>
+
+  <!-- GS/PMIP -->
+  <div class="category">
+    <h3>GS/PMIP</h3>
+    <div class="cards">
+      <div class="card" data-name="Sonia Reddy" data-role="GS/PMIP" data-description="Sonia helps students with career planning, mentorship, and skill development." data-book="https://bookinglink.com/sonia-reddy"><div class="card-top"><img src="https://picsum.photos/142" alt="Profile"><h4>Sonia Reddy</h4></div><div class="card-bottom">GS/PMIP</div></div>
+      <div class="card" data-name="Vivek Bhat" data-role="GS/PMIP" data-description="Vivek has extensive experience in project management and guides students in career planning." data-book="https://bookinglink.com/vivek-bhat"><div class="card-top"><img src="https://picsum.photos/143" alt="Profile"><h4>Vivek Bhat</h4></div><div class="card-bottom">GS/PMIP</div></div>
+      <div class="card" data-name="Pooja Iyer" data-role="GS/PMIP" data-description="Pooja specializes in professional mentorship and career guidance for students." data-book="https://bookinglink.com/pooja-iyer"><div class="card-top"><img src="https://picsum.photos/144" alt="Profile"><h4>Pooja Iyer</h4></div><div class="card-bottom">GS/PMIP</div></div>
+    </div>
+  </div>
+
+  <!-- Marupadi -->
+  <div class="category">
+    <h3>Marupadi</h3>
+    <div class="cards">
+      <div class="card" data-name="Hari Krishnan" data-role="Marupadi" data-description="Hari guides students in entrepreneurship and leadership skills." data-book="https://bookinglink.com/hari-krishnan"><div class="card-top"><img src="https://picsum.photos/145" alt="Profile"><h4>Hari Krishnan</h4></div><div class="card-bottom">Marupadi</div></div>
+      <div class="card" data-name="Meera S" data-role="Marupadi" data-description="Meera focuses on mentoring students in creative thinking and innovation." data-book="https://bookinglink.com/meera-s"><div class="card-top"><img src="https://picsum.photos/146" alt="Profile"><h4>Meera S</h4></div><div class="card-bottom">Marupadi</div></div>
+      <div class="card" data-name="Kiran Dev" data-role="Marupadi" data-description="Kiran provides guidance in professional skills and project-based learning." data-book="https://bookinglink.com/kiran-dev"><div class="card-top"><img src="https://picsum.photos/147" alt="Profile"><h4>Kiran Dev</h4></div><div class="card-bottom">Marupadi</div></div>
+    </div>
+  </div>
+
+  <!-- Zoho Campus -->
+  <div class="category">
+    <h3>Zoho Campus</h3>
+    <div class="cards">
+      <div class="card" data-name="Rohit Menon" data-role="Zoho Campus" data-description="Rohit guides students in technology careers and innovation projects." data-book="https://bookinglink.com/rohit-menon"><div class="card-top"><img src="https://picsum.photos/148" alt="Profile"><h4>Rohit Menon</h4></div><div class="card-bottom">Zoho Campus</div></div>
+      <div class="card" data-name="Anjali Nair" data-role="Zoho Campus" data-description="Anjali mentors students in professional growth and skill development." data-book="https://bookinglink.com/anjali-nair"><div class="card-top"><img src="https://picsum.photos/149" alt="Profile"><h4>Anjali Nair</h4></div><div class="card-bottom">Zoho Campus</div></div>
+    </div>
+  </div>
+
+  <!-- 3rd Person Perspective -->
+  <div class="category">
+    <h3>3rd Person Perspective</h3>
+    <div class="cards">
+      <div class="card" data-name="Karthik S" data-role="3rd Person Perspective" data-description="Karthik provides mentorship from an observational perspective, helping students reflect on experiences and growth." data-book="https://bookinglink.com/karthik-s"><div class="card-top"><img src="https://picsum.photos/150" alt="Profile"><h4>Karthik S</h4></div><div class="card-bottom">3rd Person Perspective</div></div>
+    </div>
+  </div>
+
+  <!-- Detailed Member Modal -->
+  <div id="profileModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <img id="modalImage" src="" alt="Profile">
+      <h3 id="modalName"></h3>
+      <h4 id="modalRole"></h4>
+      <p id="modalDescription"></p>
+      <a id="bookButton" href="#" target="_blank" class="book-btn">Book</a>
+    </div>
+  </div>
+
+  <!-- Instructions Modal -->
+  <div id="instructionsModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeInstructions">&times;</span>
+      <h3>Instructions</h3>
+      <ol style="text-align:left; font-size:16px; line-height:1.6;">
+        <li>Select a member to view detailed information.</li>
+        <li>Click the "Book" button to schedule your 1-to-1 session.</li>
+        <li>Close the modal by clicking the X or outside the modal area.</li>
+      </ol>
+    </div>
+  </div>
+
+  <script>
+    // Member Modal
+    const modal = document.getElementById("profileModal");
+    const modalImage = document.getElementById("modalImage");
+    const modalName = document.getElementById("modalName");
+    const modalRole = document.getElementById("modalRole");
+    const modalDescription = document.getElementById("modalDescription");
+    const bookButton = document.getElementById("bookButton");
+    const closeBtn = modal.querySelector(".close-btn");
+
+    document.querySelectorAll(".card").forEach(card => {
+      card.addEventListener("click", () => {
+        modalImage.src = card.querySelector("img").src;
+        modalName.textContent = card.dataset.name;
+        modalRole.textContent = card.dataset.role;
+        modalDescription.textContent = card.dataset.description;
+        bookButton.href = card.dataset.book;
+        modal.classList.add("show");
+      });
+    });
+
+    closeBtn.addEventListener("click", () => { modal.classList.remove("show"); });
+    window.addEventListener("click", e => { if(e.target === modal) modal.classList.remove("show"); });
+
+    // Instructions Modal
+    const instructionsModal = document.getElementById("instructionsModal");
+    const closeInstructions = document.getElementById("closeInstructions");
+
+    window.addEventListener("load", () => {
+      setTimeout(() => { instructionsModal.classList.add("show"); }, 1000);
+    });
+
+    closeInstructions.addEventListener("click", () => { instructionsModal.classList.remove("show"); });
+    window.addEventListener("click", e => { if(e.target === instructionsModal) instructionsModal.classList.remove("show"); });
+  </script>
+</body>
+</html>
