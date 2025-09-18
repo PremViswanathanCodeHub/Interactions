@@ -19,6 +19,7 @@
             padding: 30px 80px;
             background: var(--bg);
             color: #222;
+            position: relative;
         }
 
         h1 {
@@ -82,47 +83,49 @@
         }
 
         .h-card {
-          display: flex;
-          align-items: flex-start;
-          background: #fff;
-          border-radius: 12px;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-          padding: 30px;
-          margin: 20px auto;     /* Center align */
-          width: 200%;
-          height: 200px;
-          transition: transform 0.2s;
+            display: flex;
+            align-items: flex-start;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            margin: 20px auto;
+            /* Center align */
+            width: 200%;
+            height: 200px;
+            transition: transform 0.2s;
+            cursor: pointer;
         }
 
 
         .h-card:hover {
-          transform: translateY(-4px);
+            transform: translateY(-4px);
         }
 
         .h-card-img {
-          width: 200px;
-          height: 200px;
-          border-radius: 50%;
-          object-fit: cover;
-          margin-right: 30px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 30px;
         }
 
         .h-card-content {
-          flex: 1;
+            flex: 1;
         }
 
         .h-card-title {
-          margin: 0 0 15px;
-          font-size: 36px;
-          font-weight: bold;
-          color: #333;
+            margin: 0 0 15px;
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
         }
 
         .h-card-desc {
-          margin: 0;
-          font-size: 26px;
-          color: #555;
-          line-height: 1.6;
+            margin: 0;
+            font-size: 26px;
+            color: #555;
+            line-height: 1.6;
         }
 
         .card-top {
@@ -160,17 +163,19 @@
         }
 
         .card-img-top-left {
-          width: 400px;
-          height: auto;
-          float: center;
-          margin-left: 10px;
-          margin-bottom: 15px;
+            display: inline-block;
+            margin-inline: auto;
+            margin-bottom: 32px;
         }
 
 
         /* Modal */
         .modal {
             position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             inset: 0;
             display: flex;
             align-items: center;
@@ -179,12 +184,13 @@
             z-index: 1000;
             opacity: 0;
             pointer-events: none;
-            transition: opacity .28s ease
+            transition: opacity .28s ease;
+            padding-block: 30px;
         }
 
         .modal.show {
             opacity: 1;
-            pointer-events: all
+            pointer-events: all;
         }
 
         .modal-content {
@@ -195,7 +201,9 @@
             max-width: 94%;
             box-shadow: 0 16px 50px rgba(0, 0, 0, 0.28);
             transform: scale(.86);
-            transition: transform .28s ease
+            transition: transform .28s ease;
+            max-height: 700px;
+            overflow: scroll;
         }
 
         .modal.show .modal-content {
@@ -229,6 +237,12 @@
             max-height: 48vh;
             overflow: auto;
             padding-right: 6px
+        }
+
+        .image-card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .close-btn {
@@ -288,22 +302,15 @@
 
 <body>
 
-</div>
-      <div class="image-card">
-        <img src="ZSL.png" alt="Profile Image" class="card-img-top-left">
-      </div>
+    </div>
+    <div class="image-card">
+        <img src="ZSL.png" alt="Profile Image" class="card-img-top-left" width="400">
+    </div>
 
     <h1>Truly ZS</h1>
     <h2>One-on-One Interaction Bookings</h2>
     <div class="spacer"></div>
-    <h2>Scroll Down to check out the members before you choose</h2>    
-    <div class="spacer"></div>
-
-    <!-- Booking iframe -->
-    <iframe width='100%' height='625px' src='https://zohoschools.zohobookings.in/portal-embed#/118076000001056108'
-        frameborder='0' allowfullscreen=''></iframe>
-
-
+    <h2>Select the member you’d like to interact with and complete your booking</h2>
     <div class="spacer"></div>
 
     <!-- ======= Categories and Cards (mirrored order from your file) ======= -->
@@ -842,7 +849,12 @@
                             alt="Layeekha Parveen" loading="lazy">
                         <h4>Layeekha Parveen</h4>
                         <div class="full-desc" style="display:none">
-                            <p>Layeekha Parveen is a faculty member at the Zoho School of Business, a genuine polyglot. She teaches English to students, and supplements it with evening classes teaching spoken Hindi through Tamil as well as spoken Tamil through Hindi! She also assists in soft skills training. In addition, she supports fellow faculty members whenever needed. Passionate about continuous learning, she enjoys reading books, listening to music, and exploring nature and philosophy.</p>
+                            <p>Layeekha Parveen is a faculty member at the Zoho School of Business, a genuine polyglot.
+                                She teaches English to students, and supplements it with evening classes teaching spoken
+                                Hindi through Tamil as well as spoken Tamil through Hindi! She also assists in soft
+                                skills training. In addition, she supports fellow faculty members whenever needed.
+                                Passionate about continuous learning, she enjoys reading books, listening to music, and
+                                exploring nature and philosophy.</p>
                         </div>
                     </div>
                     <div class="card-bottom">Parent</div>
@@ -851,12 +863,15 @@
                 <div class="card" data-name="Ashok" data-role="Parent">
                     <div class="card-top">
                         <img data-src="26.jpg"
-                            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
-                            alt="Ashok" loading="lazy">
+                            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Ashok"
+                            loading="lazy">
                         <h4>Ashok</h4>
                         <div class="full-desc" style="display:none">
-                            <p>I have been serving as a security guard at Zoho for 7 years, and today I’m proud that both my son and daughter are working at Zoho Corporation. This was possible only because they had the chance to study at Zoho Schools.
-This opportunity has been a turning point for my family, and I sincerely thank Zoho for making this possible.</p>
+                            <p>I have been serving as a security guard at Zoho for 7 years, and today I’m proud that
+                                both my son and daughter are working at Zoho Corporation. This was possible only because
+                                they had the chance to study at Zoho Schools.
+                                This opportunity has been a turning point for my family, and I sincerely thank Zoho for
+                                making this possible.</p>
                         </div>
                     </div>
                     <div class="card-bottom">Parent</div>
@@ -872,11 +887,14 @@ This opportunity has been a turning point for my family, and I sincerely thank Z
                 <div class="card" data-name="Bharathy" data-role="External">
                     <div class="card-top">
                         <img data-src="27.jpg"
-                            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
-                            alt="Bharathy" loading="lazy">
+                            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Bharathy"
+                            loading="lazy">
                         <h4>Bharathy</h4>
                         <div class="full-desc" style="display:none">
-                            <p>Bharathy Ganesh Ram is a self-confessed Zoho-phile, deeply passionate about all things Zoho. Always eager to read, listen, watch, and engage with Zoho’s initiatives, Bharathy enthusiastically shares and promotes these efforts to the world, aiming to inspire more people to discover and benefit from Zoho’s impactful work.</p>
+                            <p>Bharathy Ganesh Ram is a self-confessed Zoho-phile, deeply passionate about all things
+                                Zoho. Always eager to read, listen, watch, and engage with Zoho’s initiatives, Bharathy
+                                enthusiastically shares and promotes these efforts to the world, aiming to inspire more
+                                people to discover and benefit from Zoho’s impactful work.</p>
                         </div>
                     </div>
                     <div class="card-bottom">External</div>
@@ -885,18 +903,20 @@ This opportunity has been a turning point for my family, and I sincerely thank Z
         </div>
 
         <!-- Horizontal Card -->
-        <div class="h-card">
-          <img src="28.png" alt="Zoho Campus" class="h-card-img">
-          <div class="h-card-content">
-            <h3 class="h-card-title">Zoho Campus</h3>
-            <p class="h-card-desc">
-              Zoho Campus unifies every aspect of your institution in one platform. By connecting academics, administration, and communication, it empowers you to streamline operations and focus on creating the best learning experiences.
-            </p>
-          </div>
+        <div class="h-card" modalName="Zoho Campus">
+            <img src="28.png" alt="Zoho Campus" class="h-card-img">
+            <div class="h-card-content">
+                <h3 class="h-card-title">Zoho Campus</h3>
+                <p class="h-card-desc full-desc">
+                    Zoho Campus unifies every aspect of your institution in one platform. By connecting academics,
+                    administration, and communication, it empowers you to streamline operations and focus on creating
+                    the best learning experiences.
+                </p>
+            </div>
         </div>
     </div>
 
-    
+
 
     <!-- ======= Modals ======= -->
     <div id="profileModal" class="modal" aria-hidden="true">
@@ -906,6 +926,8 @@ This opportunity has been a turning point for my family, and I sincerely thank Z
             <h3 id="modalName"></h3>
             <h4 id="modalRole"></h4>
             <p id="modalDescription"></p>
+            <iframe width='100%' height='750px' src='https://zohoschools.zohobookings.in/portal-embed#/' frameborder='0'
+                allowfullscreen=''></iframe>
         </div>
     </div>
 
@@ -914,10 +936,14 @@ This opportunity has been a turning point for my family, and I sincerely thank Z
             <span class="close-btn" id="closeInstructions" aria-label="Close instructions">&times;</span>
             <h3>Important Instructions</h3>
             <ol style="text-align:left;font-size:16px;line-height:1.6">
-                <li><b>Explore Profiles</b> – Scroll down the page to view details of all available people. Click on each person to learn more about them.</li>
-                <li><b>Select Your Three</b> – Finalize the three people you’d like to interact with during your 45-minute session (3 slots of 15 minutes each).</li>
-                <li><b>Book Your Slots</b> – Scroll back to the top, choose a time slot for each candidate, and confirm your booking. You can click on the time to change the slot and click on the resource to change the candidate.</li>
-                <p><b>Please note:</b> Slot selection is on a first-come, first-served basis. If you cannot book a person in a specific slot, it means someone else has already booked them.</p>
+                <li><b>Explore Profiles</b> – Scroll through the page to view details of all available people. Click on
+                    each person to learn more about them and book them for interaction.</li>
+                <li><b>Select Your Three</b> – Finalize the three people you’d like to interact with during your
+                    45-minute session (3 slots of 15 minutes each).</li>
+                <li><b>Book Your Slots</b> – You can click on the time to change the slot. Ensure that you are not
+                    booking multiple people for the same slot.</li>
+                <p><b>Please note:</b> Slot selection is on a first-come, first-served basis. If you cannot book a
+                    person in a specific slot, it means someone else has already booked them.</p>
             </ol>
         </div>
     </div>
@@ -971,6 +997,7 @@ This opportunity has been a turning point for my family, and I sincerely thank Z
                     modal.classList.add('show');
                     document.body.style.overflow = 'hidden';
                     modal.setAttribute('aria-hidden', 'false');
+                    modal.querySelector('iframe').setAttribute('src', 'https://zohoschools.zohobookings.in/portal-embed#/' + name.replace(/\s+/g, '').toLowerCase());
                 }
                 function closeProfile() {
                     modal.classList.remove('show');
@@ -984,6 +1011,10 @@ This opportunity has been a turning point for my family, and I sincerely thank Z
                 closeBtn.addEventListener('click', closeProfile);
                 window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeProfile(); });
                 window.addEventListener('click', (e) => { if (e.target === modal) closeProfile(); });
+
+                document.querySelector('.h-card').addEventListener('click', () => {
+                    openProfile(document.querySelector('.h-card'));
+                });
 
                 // Instructions modal
                 const instructionsModal = document.getElementById('instructionsModal');
